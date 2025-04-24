@@ -22,7 +22,9 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
 # Manual provisioning
 
 - if the provisioning with virtualbox should not work, there is a shell script in scripts that can be run on the guest machine: setup.sh
-- mount the folder `scripts` onto `/mnt` (see screenshots --> virtualbox_01 - virtualbox_03)
+- in the Vagrantfile comment all `config.vm.provision` options out
+- vagrant up
+- in the virtualbox GUI mount the folder `scripts` onto `/mnt` (see screenshots --> virtualbox_01 - virtualbox_03)
 - issue the following commands:
 - `cd /mnt`
 - `sh setup.sh`
@@ -33,4 +35,8 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
 - in virtualbox switch the first network adapter of the virtual machine from nat to hostonly (see screenshots --> virtualbox_04 - virtualbox_05)
 - to get the ip address of the guest machine run on the guest machine the following command: `ip addr show` (see screenshots --> virtualmachine_01)
 - open the browser on the host machine
-- enter http://<insert guest ip address>/phpMyAdmin (for example: http://192.168.56.3/phpMyAdmin)
+- enter http://<insert guest ip address>/phpmyadmin (for example: http://192.168.56.3/phpmyadmin)
+
+# Windows remarks
+
+- if the host is a windows machine, make sure that you installed virtualbox with admin rights (run the installation exe as administrator; is required for setting up network adapters), otherwise private networks / host-only adapters won't work, aka this provisioning
