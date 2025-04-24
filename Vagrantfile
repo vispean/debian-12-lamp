@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.56.10"
 
   config.vm.provider "virtualbox" do |vb|
-    # Name of the machine
+    # Name of the machine:
     vb.name = "debian-12-bookworm-ch-kde-lamp-phpmyadmin"
 
     # Display the VirtualBox GUI when booting the machine
@@ -37,6 +37,17 @@ Vagrant.configure("2") do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
+
+  config.vm.provider "parallels" do |prl|
+    # Name of the machine:
+    prl.name = "debian-12-bookworm-ch-kde-lamp-phpmyadmin"
+
+    # Customize the amount of memory on the VM:
+    #prl.memory = 8192
+
+    # Customize the amount of graphics memory on the VM:
+    prl.customize ["set", :id, "--vram", "128"]
+  end
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
