@@ -18,22 +18,22 @@
     #########
 
 function setUpChromium {
-	# install chromium
-	sudo apt-get install -y chromium
+    # install chromium
+    sudo apt-get install -y chromium
 }
 
 function setUpPhpMyAdminLink {
-	# create link to phpMyAdmin on desktop
-	cp /etc/phpmyadmin/phpmyadmin.desktop /home/vagrant/Schreibtisch/phpMyAdmin.desktop
+    # create link to phpMyAdmin on desktop
+    cp /etc/phpmyadmin/phpmyadmin.desktop /home/vagrant/Schreibtisch/phpMyAdmin.desktop
 }
 
 function setUpTEKO {
     # copy exercise files to desktop
-	mkdir /home/vagrant/Schreibtisch/Teko
-	cp /vagrant/teko/0_taulab_v0.sql /home/vagrant/Schreibtisch/Teko/0_taulab_v0.sql
-	cp /vagrant/teko/1_taulab_upgrade_step_1.sql /home/vagrant/Schreibtisch/Teko/1_taulab_upgrade_step_1.sql
-	cp /vagrant/teko/3_taulab_upgrade_step_3.sql /home/vagrant/Schreibtisch/Teko/3_taulab_upgrade_step_3.sql
-	cp /vagrant/teko/4_taulab_v1.sql /home/vagrant/Schreibtisch/Teko/4_taulab_v1.sql
+    mkdir /home/vagrant/Schreibtisch/Teko
+    cp /vagrant/teko/0_taulab_v0.sql /home/vagrant/Schreibtisch/Teko/0_taulab_v0.sql
+    cp /vagrant/teko/1_taulab_upgrade_step_1.sql /home/vagrant/Schreibtisch/Teko/1_taulab_upgrade_step_1.sql
+    cp /vagrant/teko/3_taulab_upgrade_step_3.sql /home/vagrant/Schreibtisch/Teko/3_taulab_upgrade_step_3.sql
+    cp /vagrant/teko/4_taulab_v1.sql /home/vagrant/Schreibtisch/Teko/4_taulab_v1.sql
 }
 
 echo "##################"

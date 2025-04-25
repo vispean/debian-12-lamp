@@ -19,7 +19,7 @@
 
 
 function setUpTauLabDatabase {
-	# create a database for the exercise
+    # create a database for the exercise
     sudo mysql -u vagrant -pvagrant -e "CREATE DATABASE taulab;"
 }
 
