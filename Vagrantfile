@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     # Name of the machine:
-    vb.name = "debian-12-bookworm-ch-kde-lamp-phpmyadmin"
+    vb.name = "debian-12-bookworm-ch-lamp-phpmyadmin"
 
     # Display the VirtualBox GUI when booting the machine
     #vb.gui = true
