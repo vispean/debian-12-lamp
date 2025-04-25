@@ -18,24 +18,21 @@
     #########
 
 function setUpPhpMyAdmin {
-	# install phpMyAdmin
+    # install phpMyAdmin
     export DEBIAN_FRONTEND="noninteractive"
-	echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-	echo "phpmyadmin phpmyadmin/db/app-user vagrant" | debconf-set-selections
-	echo "phpmyadmin phpmyadmin/app-password-confirm password vagrant" | debconf-set-selections
-	echo "phpmyadmin phpmyadmin/mysql/admin-pass password vagrant" | debconf-set-selections
-	echo "phpmyadmin phpmyadmin/mysql/app-pass password vagrant" | debconf-set-selections
-	echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
-	apt-get install -y phpmyadmin
+    echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+    echo "phpmyadmin phpmyadmin/db/app-user vagrant" | debconf-set-selections
+    echo "phpmyadmin phpmyadmin/app-password-confirm password vagrant" | debconf-set-selections
+    echo "phpmyadmin phpmyadmin/mysql/admin-pass password vagrant" | debconf-set-selections
+    echo "phpmyadmin phpmyadmin/mysql/app-pass password vagrant" | debconf-set-selections
+    echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+    apt-get install -y phpmyadmin
 
-	# setup phpMyAdmin config
-	echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
+    # setup phpMyAdmin config
+    echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
 
-	# create link to phpMyAdmin on desktop
-	cp /etc/phpmyadmin/phpmyadmin.desktop /home/vagrant/Schreibtisch/phpMyAdmin.desktop
-
-	# restart the web server
-	systemctl restart apache2
+    # restart the web server
+    systemctl restart apache2
 }
 
 echo "####################"
