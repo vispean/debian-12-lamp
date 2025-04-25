@@ -28,11 +28,12 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
 - issue the following commands:
 - `cd /mnt`
 - `sh setup.sh`
-- `history -c && sudo shutdown -h now`
-
-# Connect from host to guest after manual provisioning
-
+- power off virtual machine (make sure the virtual machine is not running): `history -c && sudo shutdown -h now`
 - AFTER manual provisioning (otherwise nothing will be installed during provisioning) switch in virtualbox the first network adapter of the virtual machine from nat to hostonly (see screenshots --> virtualbox_04 - virtualbox_05)
+- start virtual machine
+- login directly in to the virtual machine (vagrant ssh doesn't work anymore)
+
+# Connect from host to guest
 - to get the ip address of the guest machine run on the guest machine the following command: `ip addr show` (see screenshots --> virtualmachine_01)
 - open the browser on the host machine
 - enter http://`<insert guest ip address>`/phpmyadmin (for example: http://192.168.56.3/phpmyadmin)
