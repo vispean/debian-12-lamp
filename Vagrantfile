@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "parallels" do |prl|
     # Name of the machine:
-    prl.name = "debian-12-bookworm-ch-kde-lamp-phpmyadmin"
+    prl.name = "debian-12-bookworm-ch-lamp-phpmyadmin"
 
     # Customize the amount of memory on the VM:
     #prl.memory = 8192
