@@ -36,7 +36,7 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
 ## Connect from host to guest
 - to get the ip address of the guest machine run on the guest machine the following command: `ip addr show` (see screenshots --> virtualmachine_01)
 - open the browser on the host machine
-- enter http://`<insert guest ip address>`/phpmyadmin (for example: http://192.168.56.3/phpmyadmin)
+- enter http://`<insert guest ip address>`/phpmyadmin (for example: http://192.168.56.10/phpmyadmin)
 
 ## Windows remarks
 
