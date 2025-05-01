@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-24
+    #  @version     alpha - 2025-04-30
     #  @since       File available since release alpha
     #
     #########
@@ -28,7 +28,9 @@ function setUpMariaDB {
     apt-get install -y mariadb-server
 
     # create database user
-    mysql -u root -p -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant'; GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'localhost'; FLUSH PRIVILEGES;"
+    mysql -u root -p -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant';"
+    mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'localhost';"
+    mysql -u root -p -e "FLUSH PRIVILEGES;"
 }
 
 function setUpPHP {
@@ -37,7 +39,7 @@ function setUpPHP {
 
     # adjust the landing page of the web server to php
     mv /var/www/html/index.html /var/www/html/_index.html
-    cp /vagrant/configs/lamp/index.php /var/www/html/index.php
+    cp /vagrant/auxiliary_files/lamp/index.php /var/www/html/index.php
 
     # restart the web server
     systemctl restart apache2

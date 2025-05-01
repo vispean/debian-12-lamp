@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     # Name of the machine:
-    vb.name = "debian-12-bookworm-ch-lamp-phpmyadmin"
+    vb.name = "debian-12-bookworm-ch-lamp-phpmyadmin-python"
 
     # Display the VirtualBox GUI when booting the machine
     #vb.gui = true
@@ -38,22 +38,12 @@ Vagrant.configure("2") do |config|
   # View the documentation for the provider you are using for more
   # information on available options.
 
-  config.vm.provider "parallels" do |prl|
-    # Name of the machine:
-    prl.name = "debian-12-bookworm-ch-lamp-phpmyadmin"
-
-    # Customize the amount of memory on the VM:
-    #prl.memory = 8192
-
-    # Customize the amount of graphics memory on the VM:
-    prl.customize ["set", :id, "--vram", "128"]
-  end
-
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", path: "scripts/lamp.sh"
   config.vm.provision "shell", path: "scripts/phpmyadmin.sh"
   config.vm.provision "shell", path: "scripts/taulab_database.sh"
-  #config.vm.provision "shell", path: "scripts/kde.sh"
+  #config.vm.provision "shell", path: "scripts/phpmyadmin_kde.sh"
+  config.vm.provision "shell", path: "scripts/local_python.sh"
 end

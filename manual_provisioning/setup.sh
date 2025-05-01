@@ -4,14 +4,14 @@
     #
     #  setup
     #
-    #  shell script for provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
+    #  shell script for provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin and/or a local python installation
     #
     #  @package     Debian-12-Bookworm-CH
     #  @subpackage  LAMP-phpMyAdmin
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-24
+    #  @version     alpha - 2025-05-01
     #  @since       File available since release alpha
     #
     #########
@@ -74,44 +74,82 @@ EOF
 }
 
 set_up_taulab_database() {
+    echo "#########################"
+    echo "# setup taulab database #"
+    echo "#########################"
+
     # create a database for the exercise
     sudo mysql -u vagrant -pvagrant -e "CREATE DATABASE taulab;"
 }
 
 set_up_chromium() {
+    echo "##################"
+    echo "# setup chromium #"
+    echo "##################"
+
     # install chromium
     sudo apt-get install -y chromium
 }
 
 set_up_phpmyadmin_link() {
+    echo "#########################"
+    echo "# setup phpmyadmin link #"
+    echo "#########################"
+
     # create link to phpMyAdmin on desktop
     cp /etc/phpmyadmin/phpmyadmin.desktop /home/vagrant/Schreibtisch/phpMyAdmin.desktop
 }
 
-set_up_teko() {
-    # copy exercise files to desktop
-    mkdir /home/vagrant/Schreibtisch/Teko
-    cp /vagrant/teko/0_taulab_v0.sql /home/vagrant/Schreibtisch/Teko/0_taulab_v0.sql
-    cp /vagrant/teko/1_taulab_upgrade_step_1.sql /home/vagrant/Schreibtisch/Teko/1_taulab_upgrade_step_1.sql
-    cp /vagrant/teko/3_taulab_upgrade_step_3.sql /home/vagrant/Schreibtisch/Teko/3_taulab_upgrade_step_3.sql
-    cp /vagrant/teko/4_taulab_v1.sql /home/vagrant/Schreibtisch/Teko/4_taulab_v1.sql
+set_up_phpmyadmin_kde() {
+    set_up_chromium
+    set_up_phpmyadmin_link
 }
 
-set_up_kde() {
-    echo "##################"
-    echo "# setup chromium #"
-    echo "##################"
-    set_up_chromium
+set_up_local_python() {
+    # install MariaDB Connector/C
+    sudo apt-get install -y libmariadb-dev
+    sudo apt-get install -y curl
+    curl -LsSO https://r.mariadb.com/downloads/mariadb_repo_setup > /home/vagrant/mariadb_repo_setup
+    chmod o+x /home/vagrant/mariadb_repo_setup
+    sudo /home/vagrant/mariadb_repo_setup \ --mariadb-server-version="mariadb-10.11.11"
+    rm /home/vagrant/mariadb_repo_setup
+    apt-get purge -y curl
 
-    cho "#########################"
-    echo "# setup phpmyadmin link #"
-    echo "#########################"
-    set_up_phpmyadmin_link
+    # install python
+    sudo apt-get install -y python3
+    sudo apt-get install -y python3-venv
+    sudo apt-get install -y pip    
 
-    echo "##############"
-    echo "# setup TEKO #"
-    echo "##############"
-    set_up_teko
+    # create python virtual environment in the vagrant home directory
+    if [ ! -d "/home/vagrant/python" ]; then
+        mkdir /home/vagrant/python
+    fi
+    python3 -m venv /home/vagrant/python
+
+    # install python module mariaDB
+    sudo /home/vagrant/python/bin/pip install mariadb
+
+    # create a database for dummy data
+    sudo mysql -u vagrant -pvagrant -e "CREATE DATABASE sakila;"
+
+    # create database user for python
+    sudo mysql -u root -p -e "CREATE USER 'python'@'localhost' IDENTIFIED BY 'python';"
+
+    # grant privileges to new database
+    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'python'@'localhost';"
+    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'vagrant'@'localhost';"
+    sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+
+    # load data into new database
+    sudo mysql -u python -ppython sakila < /mnt/sakila-schema.sql
+    sudo mysql -u python -ppython sakila < /mnt/sakila-data.sql
+
+    # copy python example script into home directory
+    cp /mnt/mariadb_example.py /home/vagrant/mariadb_example.py
+
+    # echo command to run python a script with 
+    echo "to run a python script with set up virtual environment:"
+    echo "$ sudo /home/vagrant/python/bin/python3 /home/vagrant/mariadb_example.py"
 }
 
 echo "################"
@@ -134,9 +172,11 @@ echo "# setup phpmyadmin #"
 echo "####################"
 set_up_phpmyadmin
 
-echo "#########################"
-echo "# setup taulab database #"
-echo "#########################"
-set_up_taulab_database
+#set_up_taulab_database
 
-#set_up_kde
+#set_up_phpmyadmin_kde
+
+echo "######################"
+echo "# setup local python #"
+echo "######################"
+set_up_local_python

@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-24
+    #  @version     alpha - 2025-05-01
     #  @since       File available since release alpha
     #
     #########

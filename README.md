@@ -1,6 +1,6 @@
-# Debian-12-LAMP-phpMyAdmin
+# Debian 12 LAMP
 
-Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
+Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin and/or a local python installation
 
 ## Build virtual machine in virtualbox
 
@@ -24,7 +24,7 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
 - if the provisioning with virtualbox should not work, there is a shell script in scripts that can be run on the guest machine: setup.sh
 - in the Vagrantfile comment all `config.vm.provision` options out
 - vagrant up
-- in the virtualbox GUI mount the folder `scripts` onto `/mnt` (see screenshots --> virtualbox_01 - virtualbox_03)
+- in the virtualbox GUI mount the folder `manual_provisioning` onto `/mnt` (see screenshots --> virtualbox_01 - virtualbox_03 [hint: in screenshot virtualbox_03 the folder to be mounted is named `Übung_01` and not `manual_provisioning`])
 - issue the following commands:
 - `cd /mnt`
 - `sh setup.sh`
@@ -36,7 +36,7 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin
 ## Connect from host to guest
 - to get the ip address of the guest machine run on the guest machine the following command: `ip addr show` (see screenshots --> virtualmachine_01)
 - open the browser on the host machine
-- enter http://`<insert guest ip address>`/phpmyadmin (for example: http://192.168.56.10/phpmyadmin)
+- enter http://`<insert guest ip address>`/phpMyAdmin (for example: http://192.168.56.10/phpMyAdmin)
 
 ## Windows remarks
 

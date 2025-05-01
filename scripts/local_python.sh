@@ -1,0 +1,70 @@
+#!/bin/bash
+# https://docs.vagrantup.com/v2/provisioning/shell.html
+
+#########
+    #
+    #  Local Python
+    #
+    #  shell script for provisioning of a debian 12 machine with local python functionalities (not for webserver).
+    #
+    #  @package     Debian-12-Bookworm-CH
+    #  @subpackage  LAMP
+    #  @author      Christian Locher <locher@faithpro.ch>
+    #  @copyright   2025 Faithful programming
+    #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
+    #  @version     alpha - 2025-05-01
+    #  @since       File available since release alpha
+    #
+    #########
+
+function setUpLocalPython {
+    # install MariaDB Connector/C
+    apt-get install -y libmariadb-dev
+    apt-get install -y curl
+    curl -LsSO https://r.mariadb.com/downloads/mariadb_repo_setup > /home/vagrant/mariadb_repo_setup
+    chmod o+x /home/vagrant/mariadb_repo_setup
+    /home/vagrant/mariadb_repo_setup \ --mariadb-server-version="mariadb-10.11.11"
+    rm /home/vagrant/mariadb_repo_setup
+    apt-get purge -y curl
+
+    # install python
+    apt-get install -y python3
+    apt-get install -y python3-venv
+    apt-get install -y pip
+
+    # create python virtual environment in the vagrant home directory
+    if [ ! -d "/home/vagrant/python" ]; then
+        mkdir /home/vagrant/python
+    fi
+    python3 -m venv /home/vagrant/python
+
+    # install python module mariaDB
+    /home/vagrant/python/bin/pip install mariadb
+
+    # create a database for dummy data
+    mysql -u vagrant -pvagrant -e "CREATE DATABASE sakila;"
+
+    # create database user for python
+    mysql -u root -p -e "CREATE USER 'python'@'localhost' IDENTIFIED BY 'python';"
+
+    # grant privileges to new database
+    mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'python'@'localhost';"
+    mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'vagrant'@'localhost';"
+    mysql -u root -p -e "FLUSH PRIVILEGES;"
+
+    # load data into new database
+    mysql -u python -ppython sakila < /vagrant/auxiliary_files/mariadb/sakila-schema.sql
+    mysql -u python -ppython sakila < /vagrant/auxiliary_files/mariadb/sakila-data.sql
+
+    # copy python example script into home directory
+    cp /vagrant/auxiliary_files/python/mariadb_example.py /home/vagrant/mariadb_example.py
+
+    # echo command to run python a script with 
+    echo "to run a python script with set up virtual environment:"
+    echo "$ /home/vagrant/python/bin/python3 /home/vagrant/mariadb_example.py"
+}
+
+echo "######################"
+echo "# setup local python #"
+echo "######################"
+setUpLocalPython
