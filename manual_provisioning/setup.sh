@@ -11,7 +11,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-01
+    #  @version     alpha - 2025-05-02
     #  @since       File available since release alpha
     #
     #########
@@ -33,7 +33,9 @@ set_up_mariadb() {
     sudo apt-get install -y mariadb-server
 
     # create database user
-    sudo mysql -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant'; GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'localhost'; FLUSH PRIVILEGES;"
+    sudo mysql -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant';"
+    sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'localhost';"
+    sudo mysql -e "FLUSH PRIVILEGES;"
 }
 
 set_up_php() {
