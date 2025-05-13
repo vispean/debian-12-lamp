@@ -121,6 +121,10 @@ set_up_sakila_database() {
 }
 
 set_up_local_python() {
+    echo "######################"
+    echo "# setup local python #"
+    echo "######################"
+
     # install MariaDB Connector/C
     sudo apt-get install -y libmariadb-dev
     sudo apt-get install -y curl
@@ -188,7 +192,4 @@ echo "# setup sakila database #"
 echo "#########################"
 set_up_sakila_database
 
-echo "######################"
-echo "# setup local python #"
-echo "######################"
-set_up_local_python
+#set_up_local_python
