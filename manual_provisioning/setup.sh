@@ -116,8 +116,8 @@ set_up_sakila_database() {
     sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
 
     # load data into new database
-    sudo mysql -u python -ppython sakila < /mnt/sakila-schema.sql
-    sudo mysql -u python -ppython sakila < /mnt/sakila-data.sql
+    sudo mysql -u vagrant -pvagrant sakila < /mnt/sakila-schema.sql
+    sudo mysql -u vagrant -pvagrant sakila < /mnt/sakila-data.sql
 }
 
 set_up_local_python() {
