@@ -37,6 +37,11 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin an
 
 - if the host is a windows machine, make sure that you installed virtualbox with admin rights (run the installation exe as administrator; is required for setting up network adapters), otherwise private networks / host-only adapters won't work, aka this provisioning
 
+## Sakila
+
+- the data used for populating the sakila database is taken from mysql: https://dev.mysql.com/doc/sakila/en/
+- many thanks to Mike Hillyer and all the other contributors
+
 ## Connect from host to guest
 - to get the ip address of the guest machine run on the guest machine the following command: `ip addr show` (see screenshots --> virtualmachine_01)
 - open the browser on the host machine
