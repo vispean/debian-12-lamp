@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-01
+    #  @version     alpha - 2025-05-13
     #  @since       File available since release alpha
     #
     #########
@@ -41,20 +41,12 @@ function setUpLocalPython {
     # install python module mariaDB
     /home/vagrant/python/bin/pip install mariadb
 
-    # create a database for dummy data
-    mysql -u vagrant -pvagrant -e "CREATE DATABASE sakila;"
-
     # create database user for python
     mysql -u root -p -e "CREATE USER 'python'@'localhost' IDENTIFIED BY 'python';"
 
     # grant privileges to new database
     mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'python'@'localhost';"
-    mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'vagrant'@'localhost';"
     mysql -u root -p -e "FLUSH PRIVILEGES;"
-
-    # load data into new database
-    mysql -u python -ppython sakila < /vagrant/auxiliary_files/mariadb/sakila-schema.sql
-    mysql -u python -ppython sakila < /vagrant/auxiliary_files/mariadb/sakila-data.sql
 
     # copy python example script into home directory
     cp /vagrant/auxiliary_files/python/mariadb_example.py /home/vagrant/mariadb_example.py

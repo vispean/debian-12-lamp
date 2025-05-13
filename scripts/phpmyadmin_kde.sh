@@ -27,13 +27,13 @@ function setUpPhpMyAdminLink {
     cp /etc/phpmyadmin/phpmyadmin.desktop /home/vagrant/Schreibtisch/phpMyAdmin.desktop
 }
 
-function setUpTEKO {
+function setUpTauLab {
     # copy exercise files to desktop
-    mkdir /home/vagrant/Schreibtisch/Teko
-    cp /vagrant/teko/0_taulab_v0.sql /home/vagrant/Schreibtisch/Teko/0_taulab_v0.sql
-    cp /vagrant/teko/1_taulab_upgrade_step_1.sql /home/vagrant/Schreibtisch/Teko/1_taulab_upgrade_step_1.sql
-    cp /vagrant/teko/3_taulab_upgrade_step_3.sql /home/vagrant/Schreibtisch/Teko/3_taulab_upgrade_step_3.sql
-    cp /vagrant/teko/4_taulab_v1.sql /home/vagrant/Schreibtisch/Teko/4_taulab_v1.sql
+    mkdir /home/vagrant/Schreibtisch/TauLab
+    cp /vagrant/TauLab/0_taulab_v0.sql /home/vagrant/Schreibtisch/TauLab/0_taulab_v0.sql
+    cp /vagrant/TauLab/1_taulab_upgrade_step_1.sql /home/vagrant/Schreibtisch/TauLab/1_taulab_upgrade_step_1.sql
+    cp /vagrant/TauLab/3_taulab_upgrade_step_3.sql /home/vagrant/Schreibtisch/TauLab/3_taulab_upgrade_step_3.sql
+    cp /vagrant/TauLab/4_taulab_v1.sql /home/vagrant/Schreibtisch/TauLab/4_taulab_v1.sql
 }
 
 echo "##################"
@@ -47,6 +47,6 @@ echo "#########################"
 setUpPhpMyAdminLink
 
 echo "##############"
-echo "# setup TEKO #"
+echo "# setup TauLab #"
 echo "##############"
-setUpTEKO
+setUpTauLab

@@ -11,7 +11,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-02
+    #  @version     alpha - 2025-05-13
     #  @since       File available since release alpha
     #
     #########
@@ -107,6 +107,19 @@ set_up_phpmyadmin_kde() {
     set_up_phpmyadmin_link
 }
 
+set_up_sakila_database() {
+    # create a database for dummy data
+    sudo mysql -u vagrant -pvagrant -e "CREATE DATABASE sakila;"
+
+    # grant privileges to new database
+    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'vagrant'@'localhost';"
+    sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+
+    # load data into new database
+    sudo mysql -u python -ppython sakila < /mnt/sakila-schema.sql
+    sudo mysql -u python -ppython sakila < /mnt/sakila-data.sql
+}
+
 set_up_local_python() {
     # install MariaDB Connector/C
     sudo apt-get install -y libmariadb-dev
@@ -131,20 +144,12 @@ set_up_local_python() {
     # install python module mariaDB
     sudo /home/vagrant/python/bin/pip install mariadb
 
-    # create a database for dummy data
-    sudo mysql -u vagrant -pvagrant -e "CREATE DATABASE sakila;"
-
     # create database user for python
     sudo mysql -u root -p -e "CREATE USER 'python'@'localhost' IDENTIFIED BY 'python';"
 
     # grant privileges to new database
     sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'python'@'localhost';"
-    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'vagrant'@'localhost';"
     sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
-
-    # load data into new database
-    sudo mysql -u python -ppython sakila < /mnt/sakila-schema.sql
-    sudo mysql -u python -ppython sakila < /mnt/sakila-data.sql
 
     # copy python example script into home directory
     cp /mnt/mariadb_example.py /home/vagrant/mariadb_example.py
@@ -177,6 +182,11 @@ set_up_phpmyadmin
 #set_up_taulab_database
 
 #set_up_phpmyadmin_kde
+
+echo "#########################"
+echo "# setup sakila database #"
+echo "#########################"
+set_up_sakila_database
 
 echo "######################"
 echo "# setup local python #"

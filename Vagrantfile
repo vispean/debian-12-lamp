@@ -43,7 +43,8 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", path: "scripts/lamp.sh"
   config.vm.provision "shell", path: "scripts/phpmyadmin.sh"
-  config.vm.provision "shell", path: "scripts/taulab_database.sh"
+  #config.vm.provision "shell", path: "scripts/taulab_database.sh"
   #config.vm.provision "shell", path: "scripts/phpmyadmin_kde.sh"
+  config.vm.provision "shell", path: "scripts/sakila_database.sh"
   config.vm.provision "shell", path: "scripts/local_python.sh"
 end
