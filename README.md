@@ -33,11 +33,11 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin an
 - start virtual machine
 - login directly in to the virtual machine (vagrant ssh doesn't work anymore)
 
+## Windows remarks
+
+- if the host is a windows machine, make sure that you installed virtualbox with admin rights (run the installation exe as administrator; is required for setting up network adapters), otherwise private networks / host-only adapters won't work, aka this provisioning
+
 ## Connect from host to guest
 - to get the ip address of the guest machine run on the guest machine the following command: `ip addr show` (see screenshots --> virtualmachine_01)
 - open the browser on the host machine
 - enter http://`<insert guest ip address>`/phpMyAdmin (for example: http://192.168.56.10/phpMyAdmin)
-
-## Windows remarks
-
-- if the host is a windows machine, make sure that you installed virtualbox with admin rights (run the installation exe as administrator; is required for setting up network adapters), otherwise private networks / host-only adapters won't work, aka this provisioning
