@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-13
+    #  @version     alpha - 2025-05-14
     #  @since       File available since release alpha
     #
     #########
@@ -26,8 +26,8 @@ function setUpSakilaDatabase {
     mysql -u root -p -e "FLUSH PRIVILEGES;"
 
     # load data into new database
-    mysql -u python -ppython sakila < /vagrant/auxiliary_files/mariadb/sakila-schema.sql
-    mysql -u python -ppython sakila < /vagrant/auxiliary_files/mariadb/sakila-data.sql
+    mysql -u vagrant -pvagrant sakila < /vagrant/auxiliary_files/mariadb/sakila-schema.sql
+    mysql -u vagrant -pvagrant sakila < /vagrant/auxiliary_files/mariadb/sakila-data.sql
 }
 
 echo "#########################"
