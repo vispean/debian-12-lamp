@@ -213,6 +213,6 @@ echo "# setup sakila database #"
 echo "#########################"
 set_up_sakila_database
 
-set_up_local_python
+#set_up_local_python
 
-set_up_remote_access_mariadb_python
+#set_up_remote_access_mariadb_python
