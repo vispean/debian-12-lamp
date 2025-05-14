@@ -11,7 +11,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-13
+    #  @version     alpha - 2025-05-15
     #  @since       File available since release alpha
     #
     #########
@@ -163,6 +163,27 @@ set_up_local_python() {
     echo "$ sudo /home/vagrant/python/bin/python3 /home/vagrant/mariadb_example.py"
 }
 
+set_up_remote_access_mariadb_python() {
+    echo "######################################"
+    echo "# setup remote access MariaDB python #"
+    echo "######################################"
+
+    # allow remote access to mariadb
+    sudo cp /mnt/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
+    # create database user for python
+    sudo mysql -u root -p -e "DROP USER IF EXISTS python;"
+    sudo mysql -u root -p -e "CREATE USER 'python'@'%' IDENTIFIED BY 'python';"
+
+    # grant privileges to database
+    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON sakila.* TO 'python'@'%';"
+    sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+
+    # restart maradb service
+    sudo systemctl restart mariadb
+}
+
+
 echo "################"
 echo "# setup apache #"
 echo "################"
@@ -192,4 +213,6 @@ echo "# setup sakila database #"
 echo "#########################"
 set_up_sakila_database
 
-#set_up_local_python
+set_up_local_python
+
+set_up_remote_access_mariadb_python
