@@ -47,4 +47,5 @@ Vagrant.configure("2") do |config|
   #config.vm.provision "shell", path: "scripts/phpmyadmin_kde.sh"
   config.vm.provision "shell", path: "scripts/sakila_database.sh"
   #config.vm.provision "shell", path: "scripts/local_python.sh"
+  #config.vm.provision "shell", path: "scripts/remote_access_mariadb_python.sh"
 end
