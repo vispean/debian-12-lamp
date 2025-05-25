@@ -12,10 +12,15 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-04-30
+    #  @version     alpha - 2025-05-25
     #  @since       File available since release alpha
     #
     #########
+
+function updateDebian {
+    sudo apt-get update
+    sudo apt-get full-upgrade -y
+}
 
 function setUpApache {
     # install a web server
@@ -44,6 +49,11 @@ function setUpPHP {
     # restart the web server
     systemctl restart apache2
 }
+
+echo "#################"
+echo "# update debian #"
+echo "#################"
+updateDebian
 
 echo "################"
 echo "# setup apache #"

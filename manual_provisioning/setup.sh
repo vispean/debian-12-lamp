@@ -11,7 +11,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-15
+    #  @version     alpha - 2025-05-25
     #  @since       File available since release alpha
     #
     #########
@@ -21,6 +21,11 @@
 #
 # if the user doesn't belong to the group, add it:
 # $ sudo usermod -a -G vboxsf vagrant
+
+update_debian() {
+    sudo apt-get update
+    sudo apt-get full-upgrade -y
+}
 
 set_up_apache() {
     # install a web server
@@ -102,7 +107,7 @@ set_up_phpmyadmin_link() {
     cp /etc/phpmyadmin/phpmyadmin.desktop /home/vagrant/Schreibtisch/phpMyAdmin.desktop
 }
 
-set_up_phpmyadmin_kde() {
+set_up_phpmyadmin_desktop_environment() {
     set_up_chromium
     set_up_phpmyadmin_link
 }
@@ -183,6 +188,10 @@ set_up_remote_access_mariadb_python() {
     sudo systemctl restart mariadb
 }
 
+echo "#################"
+echo "# update debian #"
+echo "#################"
+update_debian
 
 echo "################"
 echo "# setup apache #"
@@ -206,7 +215,7 @@ set_up_phpmyadmin
 
 #set_up_taulab_database
 
-#set_up_phpmyadmin_kde
+#set_up_phpmyadmin_desktop_environment
 
 echo "#########################"
 echo "# setup sakila database #"

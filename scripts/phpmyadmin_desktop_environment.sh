@@ -3,7 +3,7 @@
 
 #########
     #
-    #  KDE
+    #  Desktop Environment
     #
     #  shell script for provisioning of a debian 12 machine with functionalities based on a desktop environment.
     #
@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-04-30
+    #  @version     alpha - 2025-05-25
     #  @since       File available since release alpha
     #
     #########
