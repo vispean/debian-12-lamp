@@ -18,8 +18,8 @@
     #########
 
 function updateDebian {
-    sudo apt-get update
-    sudo apt-get full-upgrade -y
+    apt-get update
+    apt-get full-upgrade -y
 }
 
 function setUpApache {
