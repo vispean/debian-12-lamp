@@ -46,8 +46,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "scripts/lamp.sh"
   config.vm.provision "shell", path: "scripts/phpmyadmin.sh"
   #config.vm.provision "shell", path: "scripts/taulab_database.sh"
-  #config.vm.provision "shell", path: "scripts/phpmyadmin_desktop_environment.sh"
   config.vm.provision "shell", path: "scripts/sakila_database.sh"
+  #config.vm.provision "shell", path: "scripts/phpmyadmin_desktop_environment.sh"
   #config.vm.provision "shell", path: "scripts/local_python.sh"
   #config.vm.provision "shell", path: "scripts/remote_access_mariadb_python.sh"
 end

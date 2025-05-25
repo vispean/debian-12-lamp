@@ -17,36 +17,26 @@
     #
     #########
 
-function setUpChromium {
-    # install chromium
-    sudo apt-get install -y chromium
-}
-
 function setUpPhpMyAdminLink {
     # create link to phpMyAdmin on desktop
     cp /etc/phpmyadmin/phpmyadmin.desktop /home/vagrant/Schreibtisch/phpMyAdmin.desktop
 }
 
-function setUpTauLab {
+function setUpSakila {
     # copy exercise files to desktop
-    mkdir /home/vagrant/Schreibtisch/TauLab
-    cp /vagrant/TauLab/0_taulab_v0.sql /home/vagrant/Schreibtisch/TauLab/0_taulab_v0.sql
-    cp /vagrant/TauLab/1_taulab_upgrade_step_1.sql /home/vagrant/Schreibtisch/TauLab/1_taulab_upgrade_step_1.sql
-    cp /vagrant/TauLab/3_taulab_upgrade_step_3.sql /home/vagrant/Schreibtisch/TauLab/3_taulab_upgrade_step_3.sql
-    cp /vagrant/TauLab/4_taulab_v1.sql /home/vagrant/Schreibtisch/TauLab/4_taulab_v1.sql
+    mkdir /home/vagrant/Schreibtisch/Sakila
+    cp /vagrant/Sakila/Sakila_Aufgaben.md /home/vagrant/Schreibtisch/Sakila/Sakila_Aufgaben.md
+    cp /vagrant/Sakila/Sakila_Lösungen.sql /home/vagrant/Schreibtisch/Sakila/Sakila_Lösungen.sql
+    cp /vagrant/Sakila/Sakila_Exercises.md /home/vagrant/Schreibtisch/Sakila/Sakila_Exercises.md
+    cp /vagrant/Sakila/Sakila_Solutions.sql /home/vagrant/Schreibtisch/Sakila/Sakila_Solutions.sql
 }
-
-echo "##################"
-echo "# setup chromium #"
-echo "##################"
-setUpChromium
 
 echo "#########################"
 echo "# setup phpmyadmin link #"
 echo "#########################"
 setUpPhpMyAdminLink
 
-echo "##############"
-echo "# setup TauLab #"
-echo "##############"
-setUpTauLab
+echo "################"
+echo "# setup Sakila #"
+echo "################"
+setUpSakila
