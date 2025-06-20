@@ -11,7 +11,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-25
+    #  @version     alpha - 2025-06-20
     #  @since       File available since release alpha
     #
     #########
@@ -36,6 +36,9 @@ set_up_apache() {
 set_up_mariadb() {
     # install a database server
     sudo apt-get install -y mariadb-server
+
+    # install additional storage engine
+    sudo apt-get install -y mariadb-plugin-columnstore
 
     # create database user
     sudo mysql -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant';"
