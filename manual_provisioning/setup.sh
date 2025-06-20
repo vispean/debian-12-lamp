@@ -138,7 +138,7 @@ set_up_local_python() {
     sudo apt-get install -y curl
     curl -LsSO https://r.mariadb.com/downloads/mariadb_repo_setup > /home/vagrant/mariadb_repo_setup
     chmod o+x /home/vagrant/mariadb_repo_setup
-    sudo /home/vagrant/mariadb_repo_setup \ --mariadb-server-version="mariadb-10.11.11"
+    sudo /home/vagrant/mariadb_repo_setup \ --mariadb-server-version="mariadb-11.8.2"
     rm /home/vagrant/mariadb_repo_setup
     apt-get purge -y curl
 

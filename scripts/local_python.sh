@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-05-13
+    #  @version     alpha - 2025-06-20
     #  @since       File available since release alpha
     #
     #########
@@ -23,7 +23,7 @@ function setUpLocalPython {
     apt-get install -y curl
     curl -LsSO https://r.mariadb.com/downloads/mariadb_repo_setup > /home/vagrant/mariadb_repo_setup
     chmod o+x /home/vagrant/mariadb_repo_setup
-    /home/vagrant/mariadb_repo_setup \ --mariadb-server-version="mariadb-10.11.11"
+    /home/vagrant/mariadb_repo_setup \ --mariadb-server-version="mariadb-11.8.2"
     rm /home/vagrant/mariadb_repo_setup
     apt-get purge -y curl
 
