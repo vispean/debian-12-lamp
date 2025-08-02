@@ -34,13 +34,13 @@ set_up_apache() {
 }
 
 set_up_mariadb() {
-    # install a database server
-    sudo apt-get install -y mariadb-server
-
     # set up mariadb repository
     sudo apt-get install -y curl
-    curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=10.11.11
+    curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=10.11
     sudo apt-get purge -y curl
+
+    # install a database server
+    sudo apt-get install -y mariadb-server
 
     # install additional storage engine
     sudo apt-get install -y mariadb-plugin-columnstore

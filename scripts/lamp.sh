@@ -29,13 +29,13 @@ function setUpApache {
 }
 
 function setUpMariaDB {
+    # set up mariadb repository
+    apt-get install -y curl
+    curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=10.11
+    apt-get purge -y curl
+
     # install a database server
     apt-get install -y mariadb-server
-
-    # set up mariadb repository
-    apt-get install -y curl    
-    curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=10.11.11
-    apt-get purge -y curl
 
     # install additional storage engine
     apt-get install -y mariadb-plugin-columnstore
