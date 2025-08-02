@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-06-20
+    #  @version     alpha - 2025-08-02
     #  @since       File available since release alpha
     #
     #########
@@ -31,6 +31,11 @@ function setUpApache {
 function setUpMariaDB {
     # install a database server
     apt-get install -y mariadb-server
+
+    # set up mariadb repository
+    apt-get install -y curl    
+    curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=10.11.11
+    apt-get purge -y curl
 
     # install additional storage engine
     apt-get install -y mariadb-plugin-columnstore
