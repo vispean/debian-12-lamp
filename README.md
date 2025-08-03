@@ -6,7 +6,11 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin an
 
 - open console/terminal in this directory
 - issue the following command: `vagrant up`
-- this should download the corresponding vagrant box and add it to `~/.vagrant.d/boxes`
+
+## Vagrant up
+
+This should:
+- download the corresponding vagrant box and add it to `~/.vagrant.d/boxes`
 - load the box into virtualbox
 - start the new virtual machine in virtualbox
 - replace ssh keys
@@ -14,24 +18,9 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin an
 
 ## Options within Vagrantfile
 
-- `config.vm.box`: choose three other vagrant boxes
 - `vb.gui`: start the virtual machine with a window while provisioning
 - `vb.memory`: set desired memory size of the virtual machine (default is 2048 MB)
 - `config.vm.provision`: provision an additional script for smaller conveniences (requires a desktop environment)
-
-## Manual provisioning
-
-- if the provisioning with virtualbox should not work, there is a shell script in scripts that can be run on the guest machine: setup.sh
-- in the Vagrantfile comment all `config.vm.provision` options out
-- vagrant up
-- in the virtualbox GUI mount the folder `manual_provisioning` onto `/mnt` (see screenshots --> virtualbox_01 - virtualbox_03 [hint: in screenshot virtualbox_03 the folder to be mounted is named `Übung_01` and not `manual_provisioning`])
-- issue the following commands:
-- `cd /mnt`
-- `sh setup.sh`
-- power off virtual machine (make sure the virtual machine is not running): `history -c && sudo shutdown -h now`
-- AFTER manual provisioning (otherwise nothing will be installed during provisioning) switch in virtualbox the first network adapter of the virtual machine from nat to hostonly (see screenshots --> virtualbox_04 - virtualbox_05)
-- start virtual machine
-- login directly in to the virtual machine (vagrant ssh doesn't work anymore)
 
 ## Windows remarks
 
@@ -43,6 +32,6 @@ Provisioning of a debian 12 machine with a LAMP stack and possibly phpMyAdmin an
 - many thanks to Mike Hillyer and all the other contributors
 
 ## Connect from host to guest
-- to get the ip address of the guest machine run on the guest machine the following command: `ip addr show` (see screenshots --> virtualmachine_01)
+- to get the ip address of the guest machine run on the guest machine the following command: `ip addr show`
 - open the browser on the host machine
 - enter http://`<insert guest ip address>`/phpMyAdmin (for example: http://192.168.56.10/phpMyAdmin)
