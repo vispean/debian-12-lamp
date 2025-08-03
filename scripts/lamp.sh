@@ -12,7 +12,7 @@
     #  @author      Christian Locher <locher@faithpro.ch>
     #  @copyright   2025 Faithful programming
     #  @license     http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3
-    #  @version     alpha - 2025-08-02
+    #  @version     alpha - 2025-08-04
     #  @since       File available since release alpha
     #
     #########
@@ -29,13 +29,16 @@ function setUpApache {
 }
 
 function setUpMariaDB {
-    # set up mariadb repository
-    apt-get install -y curl
-    curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=10.11
-    apt-get purge -y curl
-
     # install a database server
     apt-get install -y mariadb-server
+
+    # set up mariadb repository
+    apt-get install -y curl
+    curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+    #curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=$(mariadb -V | sed -n 's/.*Distrib \([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
+    apt-get purge -y curl
+    echo "deb [signed-by=/etc/apt/keyrings/mariadb-keyring.pgp] https://mirror.mva-n.net/mariadb/repo/10.11/debian bookworm main" >> /etc/apt/sources.list.d/mariadb.list
+    apt-get update
 
     # install additional storage engine
     apt-get install -y mariadb-plugin-columnstore
